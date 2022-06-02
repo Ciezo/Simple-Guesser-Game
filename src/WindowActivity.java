@@ -135,8 +135,8 @@ public class WindowActivity {
         guessLabel = new JLabel("Number of your guesses: ");
         /** guessVal */
         guessVal = new JLabel("0"); 
-
-
+        /** hint label */
+        hint = new JLabel("Guess from 0 to 100", JLabel.CENTER);
 
         // Setting up the textfield
         user_input = new JTextField();
@@ -168,16 +168,15 @@ public class WindowActivity {
         
         /** main panel */
         mainPanel.add(emptyPanel1_asPadding, BorderLayout.CENTER);      // add the "padding"
-        mainPanel.add(outcome);     // add the label for inidicating "HIGHER" and "LOWER"
-
-
+        mainPanel.add(outcome, BorderLayout.CENTER);     // add the label for inidicating "HIGHER" and "LOWER"
+       
         // Add components and elements to the main_frame
         Mcontent_wrapper.add(mainPanel, BorderLayout.CENTER);       // ad the mainPanel to the wrapper
         user_area.add(inputLabel, BorderLayout.WEST);               // add the inputLabel to the user_area
         user_area.add(user_input, BorderLayout.CENTER);             // add the user_input to the user_area
         user_area.add(guessLabel, BorderLayout.CENTER);             // add the guessLabel to the user_area
         user_area.add(guessVal, BorderLayout.EAST);                 // add this to the user_are as well
-
+        user_area.add(hint, BorderLayout.SOUTH);
 
 
         // Fetch the instance of frame object and set all given initialized components to it 
