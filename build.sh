@@ -12,7 +12,6 @@ echo -e "███████████████████████�
 mkdir "release"
 echo -e " \t ==> Folder created!"
 jar -cvfe release/SimpleGuessingGame.jar src/Main bin/Main.class bin/*.class src bin 
-jar -cvfe SimpleGuessingGame.jar src/Main bin/Main.class bin/*.class src bin 
 echo -e "\n \n A copy of generated executable file is in ==>   release folder!"
 echo -e "---------------------------------------------------------------------"
 echo -e "\n \n Generated generated executable file is in ==>   / folder!"
