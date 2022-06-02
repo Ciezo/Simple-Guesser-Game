@@ -14,4 +14,4 @@ cd bin
 echo "Cleaning bin" 
 rm *.class
 
-msg4="$P Please, recompile and build using compile.sh found in /src/"
+msg4="$ Please, recompile and build using compile.sh found in /src/"
