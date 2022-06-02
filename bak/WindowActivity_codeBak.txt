@@ -1,0 +1,221 @@
+/* 
+    Document   : WindowActivity.java
+    Created on : June 1, 2022 
+    Author     : Cloyd Van S. Secuya
+    Description:
+        This is the class for setting up and initializing the GUI elements or components. 
+*/
+
+// IMPORT SECTION
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+
+
+public class WindowActivity {
+    
+    // We can set some attributes here to be used by some methods as an object instance later on.
+    static Dimension globalDimension = new Dimension(800, 400);
+    
+    // Window Menu
+    JMenu gameOptions;
+    JMenuItem start; 
+    JMenuItem restart; 
+    JMenuItem about; 
+    JMenuItem help;
+    JMenuItem exitOption;
+    
+    // Event listeners 
+    Main_appEvent eventHandler = new Main_appEvent(WindowActivity.this);
+    
+
+    // Constructor 
+    public WindowActivity() {
+        actionCommander();
+        addListeners();
+    }
+
+
+
+
+    // Creating a method to show a GUI 
+    public static void createAndShowGUI() {
+        // Create an instance and set up the window. KILL the process once closed.  
+        JFrame frame = new JFrame("Simple Guesser Game by Cloyd Van S. Secuya");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Create an instance of a menu BAR with white background 
+        /** We created a menu BAR through menubar object that acts as a main menu content layer to which we put the list of menus
+         *  Next, we will create in the following block sections of this code the four required menu items: 
+         *      Game Options    Exit   
+         *              * these are the following Menu items required inside the menu bar
+         * 
+         * Another thing to note is that the File item Menu should only have the one with a subitems
+         */
+        JMenuBar menubar = new JMenuBar(); 
+        menubar.setOpaque(true); 
+        menubar.setBackground(Color.white); 
+
+        // Create an instance of the first menu item: File 
+        //  * This menu item shall only be the one to have a submenu in this program.
+        //  * The rest are just empty!
+        JMenu gameOptions = new JMenu("Game Options"); 
+        gameOptions.setMnemonic(KeyEvent.VK_G);
+        gameOptions.getAccessibleContext().setAccessibleDescription("Choose among the in-game options to start interaction");
+
+        // Create an instance of the second menu item: Exit 
+        JMenu exit = new JMenu("Exit"); 
+        exit.setMnemonic(KeyEvent.VK_E);
+        exit.getAccessibleContext().setAccessibleDescription("Exit and close the game"); 
+
+
+        // We are to create the submenu for the "Game Options" menu item
+        /** Game Options 
+         *   Start  
+         *   Restart 
+         *   ---------------------      (A separator)
+         *   About 
+         *   ---------------------      (A separator)
+         *   Help
+        */
+        // 
+
+        // Create and set up instances for the menu items to be plugged into Game Options
+        JMenuItem start = new JMenuItem("Start"); 
+        start.setMnemonic(KeyEvent.VK_S);
+        gameOptions.add(start); 
+
+        JMenuItem restart = new JMenuItem("Restart"); 
+        restart.setMnemonic(KeyEvent.VK_R);
+        gameOptions.add(restart);      
+        
+        gameOptions.addSeparator();
+        
+        JMenuItem about = new JMenuItem("About"); 
+        about.setMnemonic(KeyEvent.VK_A);
+        gameOptions.add(about); 
+
+        gameOptions.addSeparator();
+        
+        JMenuItem help = new JMenuItem("Help");
+        help.setMnemonic(KeyEvent.VK_H);
+        gameOptions.add(help); 
+
+        
+
+        // Add the required menu items into the menu BAR 
+        // Game Options    Exit
+        menubar.add(gameOptions);
+        menubar.add(exit);
+
+        
+        // Create panel for the main content and use the grid layout manager
+        JPanel mainPanel = new JPanel(new GridLayout(0, 1));
+        mainPanel.setBackground(new Color(255, 255, 255));
+        
+        // Create the user area for main interaction with the application
+        JLabel inputLabel = new JLabel("Enter your guess here: "); 
+        JLabel guessLabel = new JLabel("Number of guesses: ");
+        JLabel guessVal = new JLabel("0");
+
+        // Create the user input text field
+        JTextField textfield = new  JTextField(); 
+        textfield.setPreferredSize(new Dimension(500, 25)); 
+        
+        // Create indication labels for values: "HIGER" and "LOWER" and an empty label for indication to start
+        JLabel higher = new JLabel("HIGHER", JLabel.CENTER); 
+        JLabel lower = new JLabel("LOWER", JLabel.CENTER); 
+        JLabel empty = new JLabel("' '", JLabel.CENTER);
+
+        // Set up the fonts properties for the higher and lower labels
+        higher.setOpaque(true);
+        higher.setForeground(Color.white);
+        higher.setBackground(Color.red);
+        lower.setOpaque(true);
+        lower.setForeground(Color.white); 
+        lower.setBackground(Color.green); 
+
+        // Set up the fonts for the empty label
+        empty.setOpaque(true);
+        empty.setForeground(Color.white);
+        empty.setBackground(Color.black);
+        empty.setFont(new Font("Calibri", Font.PLAIN, 96)); 
+
+        // Panels instances
+        JPanel Mcontent_wrapper = new JPanel(); 
+        JPanel user_area = new JPanel(); 
+        JPanel emptyPanel1_asPadding = new JPanel();
+
+        // Setting up the wrapper aroud the main panel
+        Mcontent_wrapper.setBackground(new Color(255, 255, 255));
+        Mcontent_wrapper.setPreferredSize(new Dimension(600, 100));
+        Mcontent_wrapper.setBorder(BorderFactory.createLineBorder(Color.black)); 
+
+        // Set up the panel as padding
+        emptyPanel1_asPadding.setOpaque(false);
+        emptyPanel1_asPadding.setPreferredSize(new Dimension(500, 20));
+        
+        // Add the empty label as placeholder as long as the game is not yet started or if there is no input
+        mainPanel.add(emptyPanel1_asPadding, BorderLayout.CENTER);
+        mainPanel.add(empty);
+
+        // Setting up the user area
+        user_area.setBackground(new Color(234, 235, 241));
+        user_area.setPreferredSize(new Dimension(50, 100)); 
+        user_area.setBorder(BorderFactory.createLineBorder(Color.gray));
+
+        Mcontent_wrapper.add(mainPanel, BorderLayout.CENTER);
+        user_area.add(inputLabel, BorderLayout.WEST);
+        user_area.add(textfield, BorderLayout.CENTER);
+        user_area.add(guessLabel, BorderLayout.CENTER); 
+        user_area.add(guessVal, BorderLayout.EAST); 
+        
+        // Fetch the instance of frame object and set all given initialized components to it 
+        frame.setSize(800,400);
+        frame.getContentPane();
+        frame.getContentPane().setPreferredSize(globalDimension);
+        frame.add(Mcontent_wrapper, BorderLayout.CENTER);
+        frame.add(user_area, BorderLayout.SOUTH);
+        frame.setJMenuBar(menubar);
+        frame.pack();
+        frame.setVisible(true);
+   
+        // Display and activate the window
+        frame.pack();
+        frame.setVisible(true);
+    }
+        
+    
+    // Create a method to set action command for event handling
+    public void actionCommander() {
+        // Log to console
+        System.out.println("Setting up action commands!!!");
+
+        // Menu Events 
+        start.setActionCommand("start");
+
+    }
+
+
+
+    public void addListeners() {
+        // Log to console 
+        System.out.println("Setting up action listeners");
+
+        // Registering listener object to menu items
+        start.addActionListener(eventHandler);
+    }
+
+
+
+    public static void main(String[] args) {
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                createAndShowGUI();
+                // new WindowActivity();
+            }
+        });
+    }
+
+}
