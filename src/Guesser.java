@@ -43,6 +43,7 @@ public class Guesser {
     public void setRGN() {
         random = new Random(); 
         input = random.nextInt(MAX_THRESHOLD); 
+        rgn = random.nextInt(MAX_THRESHOLD);
     }
 
     // A method responsible for returning the value of the generated number 

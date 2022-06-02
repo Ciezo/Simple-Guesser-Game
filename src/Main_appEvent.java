@@ -24,6 +24,7 @@ public class Main_appEvent implements ActionListener, KeyListener {
     public String commander;
     public int input;
     public int numberToGuess;
+    public int numberOfGuesses; 
     Guesser guess = new Guesser();
 
     public Main_appEvent(WindowActivity windowActivity) {
@@ -74,6 +75,13 @@ public class Main_appEvent implements ActionListener, KeyListener {
                 windowActivity.outcome.setForeground(Color.white);
                 windowActivity.outcome.setBackground(Color.black);
                 windowActivity.outcome.setText("Start Guessing!");
+                windowActivity.guessVal.setText("0");
+                // Reset the variables holding 
+                numberToGuess = 0;          // RGN
+                numberOfGuesses = 0;        // number of guesses to 0 
+                guess.no_of_guesses = 0;    // intialize back to 0
+
+                // Now, after resetting, call the handleStart(e) again
                 handleStart(e);
                 break;
             
@@ -135,7 +143,7 @@ public class Main_appEvent implements ActionListener, KeyListener {
 
 
     private void guessChecker(int numberToGuess) {
-        int numberOfGuesses = 0; 
+        numberOfGuesses = 0; 
         String no_of_tries = ""; 
 
         System.out.println("Guess checker, input: " + input);
