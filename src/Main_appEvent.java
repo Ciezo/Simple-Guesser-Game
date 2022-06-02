@@ -12,7 +12,6 @@
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
-
 import java.awt.event.*;
 import java.io.IOException;
 import java.net.URI;
@@ -207,6 +206,26 @@ public class Main_appEvent implements ActionListener, KeyListener {
         // Try link to github 
             JLabel link = new JLabel(new ImageIcon("assets/icons/github.png")); 
         
+        // Label
+        JLabel label = new JLabel("Developer and Copyright Holder", JLabel.CENTER);
+        JLabel copyrightMsgHeader = new JLabel("", JLabel.CENTER);
+        
+        // Editor pane for license content
+        JEditorPane copyrightBody = new JEditorPane(); 
+
+        // Scrollable
+        JScrollPane copyContentScrollable = new JScrollPane(copyrightBody);
+
+        // Setting up the copyright message
+        /** Copyright header */
+        copyrightMsgHeader.setText("<html><body><h1>Copyright 2022 CLOYD VAN S. SECUYA</h1></body></html>");
+        
+        /** Copyright body */
+        // copyContentScrollable.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        copyrightBody.setPreferredSize(new Dimension(400, 500));
+        copyrightBody.setEditable(false);
+        copyrightBody.setText("Permission is hereby granted, free of charge, to any person obtaining a\ncopy of this software and associated documentation files (the 'Software'), \nto deal in the Software without restriction, including without limitation the\nrights to use, copy, modify, merge, publish, distribute, sublicense, and/or\nsell copies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE\nWARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.");
+
         // Create a string array of developers 
             String[] devs= {"Cloyd Secuya" };
 
@@ -251,11 +270,14 @@ public class Main_appEvent implements ActionListener, KeyListener {
 
 
         // Add these initialized components in the panel 
-            panel.add(list, BorderLayout.PAGE_END);  
+            // panel.add(list, BorderLayout.PAGE_END);  
+            panel.add(copyrightMsgHeader);
+            panel.add(copyContentScrollable);
 
         // Fetch the instance of frame object and set all given initialized components to it 
             frame_about.getContentPane();
             frame_about.setPreferredSize(new Dimension(500, 500)); 
+            frame_about.add(label, BorderLayout.PAGE_START);
             frame_about.add(panel, BorderLayout.CENTER);  
             frame_about.add(link, BorderLayout.SOUTH); 
     
@@ -276,28 +298,31 @@ public class Main_appEvent implements ActionListener, KeyListener {
 
         // Create panels
             JPanel panel = new JPanel();
+            JPanel panel2 = new JPanel();
 
         // Log to console 
-            System.out.println("Help Windowt");
+            System.out.println("Help Window");
 
         // Label for instructions 
-            JLabel msg = new JLabel();
-            JLabel prompt = new JLabel(); 
+            JLabel headerInstr = new JLabel("", JLabel.CENTER);
+            JEditorPane prompt = new JEditorPane(); 
+            prompt.setPreferredSize(new Dimension(400, 350));
+            prompt.setEditable(false);
 
          // Try wrapping
-            /** About content panel */ 
-            msg.setText("<html><body><h1>INSTRUCTIONS</h1><p>You need to guess the number in a range of 0 - 100. Keep trying until you get it right<br> Avoid getting hit on the walls and do not bite yourself <br> </p><h2>Developers</h2> </body></html>");
+            /** Help content panel */ 
+            headerInstr.setText("<html><body><h1>INSTRUCTIONS</h1></body></html>");
+            prompt.setText("Welcome to the Simple Guessing Game By Cloyd Van S. Secuya! \n \n1.) To play and start the game, head to the Game Options and Click Start \n2.) For restarting the game, kindly go to the Game Options and Click \nRestart \n\n3.) To see the developer and credits of this game, then, head to About \n4. To view this set of instructions agai, click Help \n5.) To exit or close the game, then, head to the Exit option and click Close \n \nHAVE FUN GUESSING!!!!" );
 
-            prompt.setText("<html><body><h3>A Development and Design By:</h3><p>Cloyd Secuya <br> </p> <br> </body></html>");
-            
         // Add these initialized components in the panel 
-            panel.add(msg, BorderLayout.LINE_START); 
-            panel.add(prompt, BorderLayout.SOUTH); 
+            panel.add(headerInstr); 
+            panel2.add(prompt);
 
         // Fetch the instance of frame object and set all given initialized components to it 
             frame_help.getContentPane();
             frame_help.setPreferredSize(new Dimension(500, 500)); 
-            frame_help.add(panel, BorderLayout.CENTER);  
+            frame_help.add(panel, BorderLayout.PAGE_START);  
+            frame_help.add(panel2);
     
         // Avoid resizing
             frame_help.setResizable(false);
