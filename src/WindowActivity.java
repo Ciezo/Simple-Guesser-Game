@@ -36,6 +36,8 @@ public class WindowActivity {
     JMenuItem help;
     JMenu exitOption;
     JMenuItem close;
+    JMenu Settings;
+    JMenuItem maxSet; 
 
     // Textfield for user input
     JTextField user_input;
@@ -82,9 +84,10 @@ public class WindowActivity {
         menubar.setBackground(Color.white); 
 
 
-        // Instantiate and prepare the Game menu and Exit menu items
+        // Instantiate and prepare the Game Menu, Exit Menu and Settings Menu
         gameOptions = new JMenu("Game Options"); 
         exitOption = new JMenu("Exit");
+        Settings = new JMenu("Settings");
         
         // Prepare and instantiate the menu items for Game Options
         start = new JMenuItem("Start");
@@ -95,6 +98,9 @@ public class WindowActivity {
         // Prepare and instantiate the menu items for Exit
         close = new JMenuItem("Close...");
 
+        // Prepare and instantiate the Settings Menu, sub-menu item 
+        maxSet = new JMenuItem("Set Max Limit");
+
         // Set the hot key for the menu items and actions
         gameOptions.setMnemonic(KeyEvent.VK_G);
         start.setMnemonic(KeyEvent.VK_S);
@@ -103,6 +109,8 @@ public class WindowActivity {
         help.setMnemonic(KeyEvent.VK_H);
         exitOption.setMnemonic(KeyEvent.VK_E);
         close.setMnemonic(KeyEvent.VK_C);
+        Settings.setMnemonic(KeyEvent.VK_T);
+        maxSet.setMnemonic(KeyEvent.VK_M);
 
         // Adding the sub-items for the game option. Along with a proper separator
         gameOptions.add(start);
@@ -115,8 +123,12 @@ public class WindowActivity {
         // Add the close option to the exit menu
         exitOption.add(close);
 
+        // Add the items under the Settings menu
+        Settings.add(maxSet);
+
         // Now, we want to add the menu items to the menubar
         menubar.add(gameOptions); 
+        menubar.add(Settings);
         menubar.add(exitOption);
 
         
@@ -208,7 +220,8 @@ public class WindowActivity {
         restart.setActionCommand("restart");
         about.setActionCommand("about");
         help.setActionCommand("help");
-        close.setActionCommand("close");;
+        close.setActionCommand("close");
+        maxSet.setActionCommand("max_threshold_settings");
     }
 
 
@@ -223,6 +236,7 @@ public class WindowActivity {
         about.addActionListener(eventHandler);
         help.addActionListener(eventHandler);
         close.addActionListener(eventHandler);
+        maxSet.addActionListener(eventHandler);
 
         // Adding key listeners to the textfield
         user_input.setFocusable(true);

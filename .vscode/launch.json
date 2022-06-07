@@ -23,20 +23,6 @@
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "Launch Guesser",
-            "request": "launch",
-            "mainClass": "Guesser",
-            "projectName": "Simple-Guesser-Game_5510290e"
-        },
-        {
-            "type": "java",
-            "name": "Launch windowActivity",
-            "request": "launch",
-            "mainClass": "windowActivity",
-            "projectName": "Simple-Guesser-Game_5510290e"
         }
     ]
 }

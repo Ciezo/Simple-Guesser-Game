@@ -98,6 +98,10 @@ public class Main_appEvent implements ActionListener, KeyListener {
             case "close":
                 System.out.println("Close");
                 handleOnClose();
+
+            case "max_threshold_settings":
+                System.out.println("Setting the max threshold limit....");
+                handleSetMaxThreshold(); 
         } 
         
     }
@@ -377,5 +381,51 @@ public class Main_appEvent implements ActionListener, KeyListener {
                 System.out.println("Decision entered");
                 break; 
         }
+    }
+
+
+
+    private void handleSetMaxThreshold() {
+        int maxRangeToSet; 
+
+        // Create an input dialog which will pop-up
+        // And store that String value into setMaxRange_asTxt  
+        String setMaxRange_asTxt = (String) JOptionPane.showInputDialog(null, "Enter your maximum range");
+        
+        // Try and log to console the input as String
+        System.out.println("Entered from the input diaglog from Settings: " + setMaxRange_asTxt);
+        
+        // Next, we want to make sure that the user has entered an object that is of String type so 
+        // we will be using am exception handler through try-catch
+
+        try {
+            // Parse the setMaxRange_asTxt as Integer and assign it to rangeVal
+            int rangeVal = Integer.parseInt(setMaxRange_asTxt); 
+            
+            // Try and log the parsed Integer to the console
+            System.out.println("Parsed Integer input from dialog: " + rangeVal);
+
+            // After parsing and printing to console to make sure that it is an Integer, 
+            // assign it the maxRangeToSet. Then set our guess object's max threshold value accordingly
+            maxRangeToSet = rangeVal; 
+            guess.MAX_THRESHOLD = maxRangeToSet;
+
+            // Try and see if it works on console
+            System.out.println("Setting the max threshold of the guess object: " + guess.MAX_THRESHOLD);
+
+            // Okay, now, we need to set the text of the guess hint to whatever the user has set.
+            windowActivity.hint.setText("Guess from 0 to " + setMaxRange_asTxt);
+        }
+
+        catch (NumberFormatException ex) {
+            // Debugging errors 
+            ex.printStackTrace();
+
+            // Call the dedicated function to notify the user about the wrong value they entered
+            handleInputErrors(ex);
+        }
+
+        // Prompt the user to restart their game after setting their own range!
+        JOptionPane.showMessageDialog(null, "Restart your game through the menu!");
     }
 }
