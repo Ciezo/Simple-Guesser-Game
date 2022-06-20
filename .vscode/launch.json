@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Guesser",
+            "request": "launch",
+            "mainClass": "Guesser",
+            "projectName": "Simple-Guesser-Game_5510290e"
+        },
+        {
+            "type": "java",
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "Main",
